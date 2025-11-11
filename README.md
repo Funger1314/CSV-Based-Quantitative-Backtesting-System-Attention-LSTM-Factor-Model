@@ -63,13 +63,13 @@ This mechanism is inspired by the Attention mechanism, focusing capital only on 
 
 The model operates through six key stages:
 
-**Data Loading and Initialization**
+#### **Data Loading and Initialization**
 
 -Load data from prices.csv and factors.csv.
 
 -Initialize portfolio, benchmark, and regression parameters.
 
-**Factor Filtering and Stock Pool Construction**
+#### **Factor Filtering and Stock Pool Construction**
 
 -Select top 10% by net_profit_growth_ratio.
 
@@ -77,25 +77,25 @@ The model operates through six key stages:
 
 -Sort remaining stocks by current_market_cap.
 
-**Slope-Based Market Signal Generation**
+#### **Slope-Based Market Signal Generation**
 
 -Perform rolling OLS regression to calculate slope and R².
 
 -Convert to z-score for signal classification (BUY/SELL/KEEP).
 
-**Trading Decision and Position Adjustment**
+#### **Trading Decision and Position Adjustment**
 
 -SELL: close all holdings.
 
 -BUY/KEEP: equally allocate among candidate stocks.
 
-**Trade Execution and Logging**
+#### **Trade Execution and Logging**
 
 -Simulate trades and update cash/positions.
 
 -Save all trade logs to trades.csv.
 
-**Equity Calculation and Performance Output**
+#### **Equity Calculation and Performance Output**
 
 -Compute total equity:
 
@@ -174,6 +174,7 @@ pip install -r requirements.txt
 
 -Explore reinforcement learning for adaptive portfolio control
 
+---
 
 **License**
 
