@@ -55,50 +55,121 @@ BUY/KEEP → allocate equally among top-ranked stocks
 
 This mechanism is inspired by the Attention mechanism, focusing capital only on high-scoring stocks while filtering out noise.
 
-Workflow
+**Workflow**
 
 The model operates through six key stages:
 
-Data Loading and Initialization
+**Data Loading and Initialization**
 
-Load data from prices.csv and factors.csv.
+-Load data from prices.csv and factors.csv.
 
-Initialize portfolio, benchmark, and regression parameters.
+-Initialize portfolio, benchmark, and regression parameters.
 
-Factor Filtering and Stock Pool Construction
+**Factor Filtering and Stock Pool Construction**
 
-Select top 10% by net_profit_growth_ratio.
+-Select top 10% by net_profit_growth_ratio.
 
-Select top 50% by his_peg.
+-Select top 50% by his_peg.
 
-Sort remaining stocks by current_market_cap.
+-Sort remaining stocks by current_market_cap.
 
-Slope-Based Market Signal Generation
+**Slope-Based Market Signal Generation**
 
-Perform rolling OLS regression to calculate slope and R².
+-Perform rolling OLS regression to calculate slope and R².
 
-Convert to z-score for signal classification (BUY/SELL/KEEP).
+-Convert to z-score for signal classification (BUY/SELL/KEEP).
 
-Trading Decision and Position Adjustment
+**Trading Decision and Position Adjustment**
 
-SELL: close all holdings.
+-SELL: close all holdings.
 
-BUY/KEEP: equally allocate among candidate stocks.
+-BUY/KEEP: equally allocate among candidate stocks.
 
-Trade Execution and Logging
+**Trade Execution and Logging**
 
-Simulate trades and update cash/positions.
+-Simulate trades and update cash/positions.
 
-Save all trade logs to trades.csv.
+-Save all trade logs to trades.csv.
 
-Equity Calculation and Performance Output
+**Equity Calculation and Performance Output**
 
-Compute total equity:
+-Compute total equity:
 
 ```Python
 Equity = Cash + Σ(Position_i × Price_i)
 ```
-Save results to equity_curve.csv and plot portfolio growth.
+-Save results to equity_curve.csv and plot portfolio growth.
+
+
+**Example Outputs**
+
+**Equity Curve** `equity_curve.csv`
+
+```Python
+date, equity, signal
+2023-01-03, 1000000.00, KEEP
+2023-01-04, 1003721.56, BUY
+...
+```
+
+**Trade Log** `trades.csv`
+
+```Python
+date, action, symbol, qty, price, gross_value, cash_before, cash_after, position_after_qty, day_signal
+2023-01-04, BUY, 600519, 54.2, 1843.5, 99981.7, 1000000.00, 900018.3, 54.2, BUY
+2023-02-07, SELL, 600519, 54.2, 1920.3, 104104.3, 900018.3, 1004122.6, 0.0, SELL
+```
+
+##Data Confidentiality Statement##
+
+Because this project was originally developed for **a quantitative trading competition and academic research,**
+The following materials are intentionally excluded:
+
+-Original datasets
+
+-Feature engineering and preprocessing logic
+
+-Model parameters and optimization details
+
+The current version uses **synthetic CSV data** with the same structure, ensuring the **framework and logic are fully reproducible.**
+
+**`This repository is intended to demonstrate the algorithmic logic and workflow, not to represent actual trading performance.`**
+
+**Dependencies**
+
+-Python ≥ 3.8
+
+-numpy
+
+-pandas
+
+-matplotlib
+
+Install with:
+
+```Python
+pip install -r requirements.txt
+```
+
+**Future Work**
+
+-Integrate volatility targeting and risk parity weighting
+
+-Add transaction cost and slippage modeling
+
+-Extend to LSTM/Transformer-based timing signals
+
+-Implement walk-forward validation
+
+-Explore reinforcement learning for adaptive portfolio control
+
+**License**
+
+MIT License © 2025
+For academic and educational use only.
+
+
+
 
 
 
