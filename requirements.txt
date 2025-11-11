@@ -1,0 +1,17 @@
+# Core scientific and data analysis libraries
+numpy>=1.21.0
+pandas>=1.3.0
+
+# Plotting and visualization
+matplotlib>=3.5.0
+
+# Machine learning / deep learning (if you plan to extend with LSTM or Attention models)
+tensorflow>=2.8.0
+scikit-learn>=1.0.0
+
+# Optional utilities
+tqdm>=4.65.0
+seaborn>=0.12.0
+
+# Environment and reproducibility
+python-dateutil>=2.8.2
